@@ -9,14 +9,15 @@
     </div>
 
     <ul class="list">
-      <li v-for="person in people" class="list__item" :key="person._id">
-        <router-link :to="{name: 'person', params: {id: person._id}}">
-          <img v-if="person.image" :src="imageUrlFor( person.image ).width(240)"/>
-          <h3>{{person.name}}</h3>
+      <li v-for="cinema in cinemas" class="list__item" :key="cinema._id">
+        <router-link :to="{name: 'cinema', params: {id: cinema._id}}">
+          <div class="card">
+            <div>{{cinema.cinemaName}}</div>
+            <h3>{{cinema.cinemaAddress}}</h3>
+          </div>
         </router-link>
       </li>
     </ul>
-
   </div>
 </template>
 
@@ -24,18 +25,17 @@
 import sanity from "../sanity";
 import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
-const query = `*[_type == "person"] {
+const query = `*[_type == "cinema"] {
   _id,
-  name,
-  image
-}
-`;
+  cinemaName,
+  cinemaAddress
+}`;
 export default {
-  name: "People",
+  name: "cinemas",
   data() {
     return {
       loading: true,
-      people: []
+      cinemas: []
     };
   },
   created() {
@@ -52,9 +52,9 @@ export default {
       this.error = this.post = null;
       this.loading = true;
       sanity.fetch(query).then(
-        people => {
+        cinemas => {
           this.loading = false;
-          this.people = people;
+          this.cinemas = cinemas;
         },
         error => {
           this.error = error;
@@ -66,7 +66,9 @@ export default {
 </script>
 
 <style scoped>
-.list {
-  margin: 1rem;
+.card{
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+  padding: 5px;
+  margin-bottom: 20px;
 }
 </style>

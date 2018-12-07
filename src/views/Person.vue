@@ -14,8 +14,8 @@
       <div>
         <h1>{{person.name}}</h1>
         <h2>Related movies</h2>
-        <ul v-if="person.actedIn" class="list">
-          <li v-for="movie in person.actedIn" :key="movie._id">
+        <ul v-if="person.isIn" class="list">
+          <li v-for="movie in person.isIn" :key="movie._id">
             <router-link :to="{name: 'movie', params: {id: movie._id}}">
               <img v-if="movie.poster" :src="imageUrlFor(movie.poster).ignoreImageParams().width(240)"/>
               <div>
@@ -37,7 +37,7 @@ const query = `*[_type == "person" && _id == $id] {
   _id,
   name,
   image,
-  "actedIn": *[_type == "movie" && references(^._id)] {
+  "isIn": *[_type == "movie" && references(^._id)] {
     _id,
     title,
     releaseDate,

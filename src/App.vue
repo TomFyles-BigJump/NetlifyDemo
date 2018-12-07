@@ -7,6 +7,9 @@
       <router-link to="/people">
         People
       </router-link>
+      <router-link to="/cinemas">
+        Cinemas
+      </router-link>
     </nav>
     <router-view />
   </div>
@@ -100,5 +103,13 @@ body {
   height: auto;
   width: 100%;
   margin-right: 0.5rem;
+}
+
+.text-center{
+  text-align: center;
+}
+
+ul.no-indication{
+  list-style: none;
 }
 </style>
