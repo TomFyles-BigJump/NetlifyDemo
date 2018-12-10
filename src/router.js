@@ -26,10 +26,22 @@ export default new Router({
         import(/* webpackChunkName: "people" */ "./views/People.vue")
     },
     {
+      path: "/users",
+      name: "users",
+      component: () =>
+        import(/* webpackChunkName: "people" */ "./views/Users/list.vue")
+    },
+    {
       path: "/cinemas",
       name: "cinemas",
       component: () =>
         import(/* webpackChunkName: "people" */ "./views/Cinemas.vue")
+    },
+    {
+      path: "/users/create",
+      name: "users create",
+      component: () =>
+        import(/* webpackChunkName: "people" */ "./views/Users/create.vue")
     },
     {
       path: "/movie/:id",
@@ -51,6 +63,13 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "person" */ "./views/Cinema.vue"),
       props: route => ({ id: route.params.id })
-    }
+    },
+    {
+      path: "/user/:id",
+      name: "user",
+      component: () =>
+        import(/* webpackChunkName: "person" */ "./views/Users/user.vue"),
+      props: route => ({ id: route.params.id })
+    },
   ]
 });

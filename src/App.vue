@@ -10,6 +10,9 @@
       <router-link to="/cinemas">
         Cinemas
       </router-link>
+      <router-link to="/users">
+        Users
+      </router-link>
     </nav>
     <router-view />
   </div>

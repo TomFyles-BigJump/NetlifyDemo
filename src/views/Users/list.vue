@@ -9,39 +9,36 @@
     </div>
 
     <ul class="list">
-      <li v-for="movie in movies" class="list__item" :key="movie._id">
-        <router-link :to="{name: 'movie', params: {id: movie._id}}">
-          <img v-if="movie.poster" :src="imageUrlFor(movie.poster).ignoreImageParams().width(240)"/>
-          <div>
-            <div>{{movie.releaseDate.substr(0, 4)}}</div>
-            <h3>{{movie.title}}</h3>
-            <span v-if="movie.director" class="movies-list__directed-by">
-              Directed by {{movie.director}}
-            </span>
+      <li v-for="user in users" class="list__item" :key="user._id">
+        <router-link :to="{name: 'user', params: {id: user._id}}">
+          <div class="card">
+            <h3>{{user.firstName}}  {{user.lastName}}</h3>
+            <p>{{user.age}}</p>
           </div>
         </router-link>
       </li>
     </ul>
+
+    <button class="mt-10" @click="createAUser()">Create</button>
   </div>
 </template>
 
 <script>
-import sanity from "../sanity";
+import sanity from "../../sanity";
 import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
-const query = `*[_type == "movie"] {
+const query = `*[_type == "user"] {
   _id,
-  title,
-  releaseDate,
-  poster,
-  "director": crewMembers[job == "Director"][0].person->name,
-} | order(releaseDate desc) [0...50]`;
+  firstName,
+  lastName,
+  age
+}`;
 export default {
-  name: "Movies",
+  name: "users",
   data() {
     return {
       loading: true,
-      movies: []
+      users: []
     };
   },
   created() {
@@ -51,6 +48,9 @@ export default {
     $route: "fetchData"
   },
   methods: {
+    createAUser(){
+      this.$router.push("/users/create");
+    },
     imageUrlFor(source) {
       return imageBuilder.image(source);
     },
@@ -58,9 +58,9 @@ export default {
       this.error = this.post = null;
       this.loading = true;
       sanity.fetch(query).then(
-        movies => {
+        users => {
           this.loading = false;
-          this.movies = movies;
+          this.users = users;
         },
         error => {
           this.error = error;
@@ -72,11 +72,13 @@ export default {
 </script>
 
 <style scoped>
-.list {
-  margin: 1rem;
+.card{
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+  padding: 5px;
+  margin-bottom: 20px;
 }
-.movies-list__directed-by {
-  display: block;
-  font-size: 1rem;
+
+.mt-10{
+  margin-top: 10vh;
 }
 </style>
