@@ -23,52 +23,59 @@ export default new Router({
       path: "/people",
       name: "people",
       component: () =>
-        import(/* webpackChunkName: "people" */ "./views/People.vue")
+        import("./views/People.vue")
     },
     {
       path: "/users",
       name: "users",
       component: () =>
-        import(/* webpackChunkName: "people" */ "./views/Users/list.vue")
+        import("./views/Users/list.vue")
     },
     {
       path: "/cinemas",
       name: "cinemas",
       component: () =>
-        import(/* webpackChunkName: "people" */ "./views/Cinemas.vue")
+        import("./views/Cinemas.vue")
     },
     {
       path: "/users/create",
       name: "users create",
       component: () =>
-        import(/* webpackChunkName: "people" */ "./views/Users/create.vue")
+        import("./views/Users/create.vue")
     },
     {
       path: "/movie/:id",
       name: "movie",
       component: () =>
-        import(/* webpackChunkName: "movie" */ "./views/Movie.vue"),
+        import("./views/Movie.vue"),
       props: route => ({ id: route.params.id })
     },
     {
       path: "/people/:id",
       name: "person",
       component: () =>
-        import(/* webpackChunkName: "person" */ "./views/Person.vue"),
+        import("./views/Person.vue"),
       props: route => ({ id: route.params.id })
     },
     {
       path: "/cinema/:id",
       name: "cinema",
       component: () =>
-        import(/* webpackChunkName: "person" */ "./views/Cinema.vue"),
+        import("./views/Cinema.vue"),
       props: route => ({ id: route.params.id })
     },
     {
       path: "/user/:id",
       name: "user",
       component: () =>
-        import(/* webpackChunkName: "person" */ "./views/Users/user.vue"),
+        import("./views/Users/user.vue"),
+      props: route => ({ id: route.params.id })
+    },
+    {
+      path: "/user/:id/edit",
+      name: "user edit",
+      component: () =>
+        import("./views/Users/edit.vue"),
       props: route => ({ id: route.params.id })
     },
   ]

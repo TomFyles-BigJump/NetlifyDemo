@@ -11,6 +11,7 @@
     <div v-if="user">
         <h1 class="text-center">{{user.firstName}}  {{user.lastName}}</h1>
         <h2 class="text-center">{{user.age}}</h2>
+        <button @click="editUser()">Edit</button>
     </div>
   </div>
 </template>
@@ -47,6 +48,9 @@ export default {
     $route: "fetchData"
   },
   methods: {
+    editUser(){
+      this.$router.push(`/user/${this.id}/edit`);
+    },
     imageUrlFor(source) {
       return imageBuilder.image(source);
     },
