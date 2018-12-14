@@ -5,7 +5,7 @@ export default sanityClient({
   projectId: "6waj1gwu",
   dataset: "production",
   useCdn: true,
-  token: 'sanity-api-key'
+  token: process.env.sanity_api_key
   // useCdn == true gives fast, cheap responses using a globally distributed cache.
   // Set this to false if your application require the freshest possible
   // data always (potentially slightly slower and a bit more expensive).

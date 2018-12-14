@@ -40,8 +40,7 @@ export default {
   },
   created() {
     this.fetchData();
-    console.log('sanity-api-key');
-    console.log(process.env)
+    console.log(process.env.sanity_api_key);
   },
   watch: {
     $route: "fetchData"
