@@ -88,6 +88,7 @@ export default {
   },
   created() {
     this.fetchData();
+    console.log("hello");
   },
   watch: {
     $route: "fetchData"
